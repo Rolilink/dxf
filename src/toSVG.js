@@ -2,13 +2,21 @@ import { pd } from 'pretty-data'
 
 import toPolylines from './toPolylines'
 
-const polylineToPath = (rgb, polyline) => {
-  const color24bit = rgb[2] | (rgb[1] << 8) | (rgb[0] << 16)
-  let prepad = color24bit.toString(16)
-  for (let i = 0, il = 6 - prepad.length; i < il; ++i) {
-    prepad = '0' + prepad
+const getLayerClass = layer => {
+  return !!layer ? `entity-layer-${layer.replace(/ /g,"_").toLowerCase()}` : ''
+}
+
+const polylineToPath = (rgb, polyline, options = { isBlackAndWhite: false, meta: {} }) => {
+  let hex = '#000000'
+
+  if (!options.isBlackAndWhite) {
+    const color24bit = rgb[2] | (rgb[1] << 8) | (rgb[0] << 16)
+    let prepad = color24bit.toString(16)
+    for (let i = 0, il = 6 - prepad.length; i < il; ++i) {
+      prepad = '0' + prepad
+
+}    hex = '#' + prepad
   }
-  let hex = '#' + prepad
 
   // SVG is white by default, so make white lines black
   if (hex === '#ffffff') {
@@ -20,19 +28,19 @@ const polylineToPath = (rgb, polyline) => {
     acc += point[0] + ',' + point[1]
     return acc
   }, '')
-  return '<path fill="none" stroke="' + hex + '" stroke-width="0.1%" d="' + d + '"/>'
+  return `<path fill="none" class="${getLayerClass(options.meta.layer)}" stroke="${hex}" stroke-width="0.1%" d="${d}"/>`
 }
 
 /**
  * Convert the interpolate polylines to SVG
  */
-export default (parsed) => {
+export default (parsed, options = { blackAndWhite: true }) => {
   const { bbox, polylines } = toPolylines(parsed)
   const paths = polylines.map((polyline, i) => {
     const vertices = polyline.vertices.map(v => {
       return [v[0], -v[1]]
     })
-    return polylineToPath(polyline.rgb, vertices)
+    return polylineToPath(polyline.rgb, vertices, { isBlackAndWhite: options.blackAndWhite, meta: polyline.meta })
   })
 
   // If the DXF is empty the bounding box will have +-Infinity values,

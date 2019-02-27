@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { HashRouter, Switch, Route, Link } from 'react-router-dom'
 
-import { parseString, toSVG } from '../../src'
+import { parseString, toSVG, getLayers } from '../../src'
 
 const names = [
   'lines',
@@ -26,6 +26,7 @@ const names = [
   'issue29',
   'issue39'
 ]
+
 const dxfs = names.map(name => require(`../resources/${name}.dxf`))
 const svgs = dxfs.map(contents => toSVG(parseString(contents)))
 

@@ -5,6 +5,7 @@ import entitiesHandler from './handlers/entities'
 import config from './config'
 import denormalise from './denormalise'
 import groupEntitiesByLayer from './groupEntitiesByLayer'
+import getLayers from './getLayers'
 import toPolylines from './toPolylines'
 import toSVG from './toSVG'
 import colors from './util/colors'
@@ -88,6 +89,7 @@ export const parseString = (string) => {
     entities: [],
     tables: { layers: {}, styles: {} }
   })
+
   return result
 }
 
@@ -95,7 +97,8 @@ export {
   config,
   denormalise,
   groupEntitiesByLayer,
+  getLayers,
   toPolylines,
   toSVG,
-  colors
+  colors,
 }

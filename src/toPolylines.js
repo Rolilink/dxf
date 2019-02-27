@@ -9,6 +9,8 @@ export default (parsed) => {
   const entities = denormalise(parsed)
   const polylines = entities.map(entity => {
     const layerTable = parsed.tables.layers[entity.layer]
+    const { layer, type } = entity;
+
     let rgb
     if (layerTable) {
       let colorNumber = ('colorNumber' in entity) ? entity.colorNumber : layerTable.colorNumber
@@ -22,7 +24,7 @@ export default (parsed) => {
       rgb = [0, 0, 0]
     }
 
-    return { rgb, vertices: entityToPolyline(entity) }
+    return { rgb, vertices: entityToPolyline(entity), meta: { layer, type } }
   })
 
   const bbox = new Box2()
