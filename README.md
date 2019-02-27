@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/bjnortier/dxf.svg?branch=master)](https://travis-ci.org/bjnortier/dxf)
-
 # dxf
 
 DXF parser for node/browser.
@@ -84,3 +82,4 @@ will execute the unit tests and functional tests, which generate SVGs for refere
 - Erik Söhnel https://github.com/hoeck
 - Teja https://github.com/hungerpirat
 - Jakob Pallhuber https://github.com/Joge97
+- Rolando Perez https://github.com/rolilink

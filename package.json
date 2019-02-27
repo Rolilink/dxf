@@ -1,7 +1,7 @@
 {
   "name": "dxf",
   "version": "3.6.0",
-  "description": "DXF parser for node/browser",
+  "description": "N9 DXF parser for node/browser, cloned from git://github.com/bjnortier/dxf.git",
   "main": "lib/index.js",
   "bin": {
     "dxf-to-svg": "lib/cli.js"
@@ -31,9 +31,9 @@
   "author": "Ben Nortier <ben@bjnortier.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bjnortier/dxf/issues"
+    "url": "https://bitbucket.org/nimbus9inc/dxf"
   },
-  "homepage": "https://github.com/bjnortier/dxf",
+  "homepage": "https://bitbucket.org/nimbus9inc/dxf",
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
